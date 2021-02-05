@@ -45,17 +45,22 @@ MY_BLUE='\[\e[01;94m\]'
 MY_GREEN='\[\033[01;36m\]'
 PS_CLEAR='\[\e[0m\]'
 
-PS1="${MYBLUE}\u@\h: \t ${MYGREEN}\w\n${PS_CLEAR}$ "
+PS1="${MY_BLUE}\u@\h: \t ${MY_GREEN}\w\n${PS_CLEAR}$ "
 ```
 
 The final version also displays a colored git branch:
 
 ```code
+MY_BLUE='\[\e[1;94m\]'
+MY_GREEN='\[\033[1;36m\]'
+MY_YELLOW='\[\033[0;33m\]'
+PS_CLEAR='\[\e[0m\]'
+
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
-export PS1="${MYBLUE}\u@\h: \t ${MYGREEN}\w\[\033[1;33m\]\$(parse_git_branch)\n\$${PS_CLEAR} "
+export PS1="${MY_BLUE}\u@\h: ${MY_YELLOW}\t ${MY_GREEN}\w${MY_YELLOW}\$(parse_git_branch)\n\$${PS_CLEAR} "
 ```
 
 Add the following the the `.bashrc` if you created a `.bash_profile`
